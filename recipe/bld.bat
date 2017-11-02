@@ -1,5 +1,5 @@
 robocopy . "%PREFIX%" /S /XF bld.bat
-if errorlevel NEQ 1 exit 1
+if errorlevel 1 exit 1
 
 cd ..
 if errorlevel 1 exit 1
