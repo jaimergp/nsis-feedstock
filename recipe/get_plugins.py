@@ -59,6 +59,8 @@ def unzip(fname, dname=None):
         with zipfile.ZipFile(fname, "r") as fh:
             common_prefix_parts = os.path.commonprefix(fh.namelist()).split("/")
             if len(common_prefix_parts) > 1:
+                # If everything is inside a single top-most folder (e.g., like in GitHub archives),
+                # skip recreating that part of the hierarchy.
                 root_folder = common_prefix_parts[0] + "/"
                 members = []
                 for zip_info in fh.infolist():
