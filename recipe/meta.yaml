@@ -21,7 +21,7 @@ about:
   home: http://sourceforge.net/projects/nsis
   summary: Nullsoft Scriptable Install System
   license: CPL-1.0, zlib, bzip2
-  license_file: COPYING
+  license_file: LICENSE.txt
 
 extra:
   recipe-maintainers:
