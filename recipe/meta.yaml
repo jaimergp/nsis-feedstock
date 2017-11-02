@@ -11,7 +11,11 @@ source:
 
 build:
   number: 0
-  skip: true  # [unix]
+  skip: true  # [not (win and py27)]
+
+requirements:
+  build:
+    - python
 
 about:
   home: http://sourceforge.net/projects/nsis
