@@ -16,11 +16,12 @@ build:
 requirements:
   build:
     - python
+    - 7za
 
 about:
   home: http://sourceforge.net/projects/nsis
   summary: Nullsoft Scriptable Install System
-  license: CPL-1.0, zlib, bzip2
+  license: CPL-1.0, zlib, bzip2, UNKNOWN
   license_file: LICENSE.txt
 
 extra:

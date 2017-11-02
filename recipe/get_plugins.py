@@ -2,6 +2,8 @@ import collections
 import contextlib
 import hashlib
 import os
+import subprocess
+import shutil
 import zipfile
 
 try:
@@ -47,42 +49,94 @@ def checksum(htname, fname):
 
 
 def unzip(fname, dname=None):
+    src_dname, ext = os.path.splitext(fname)
     if dname is None:
-        dname = os.path.splitext(fname)[0]
+        dname = src_dname
 
-    with zipfile.ZipFile(fname, "r") as fh:
-        fh.extractall(dname)
+    if ext == ".7z":
+        subprocess.check_call(["7za", "x", "-aos", "-o" + dname, "--", fname])
+    else:
+        with zipfile.ZipFile(fname, "r") as fh:
+            common_prefix_parts = os.path.commonprefix(fh.namelist()).split("/")
+            if len(common_prefix_parts) > 1:
+                root_folder = common_prefix_parts[0] + "/"
+                members = []
+                for zip_info in fh.infolist():
+                    new_file_name = zip_info.filename[len(root_folder):]
+                    if new_file_name:
+                        zip_info.filename = new_file_name
+                        members.append(zip_info)
+                fh.extractall(dname, members)
+            else:
+                fh.extractall(dname)
 
     os.remove(fname)
 
     return dname
 
 
-Download = collections.namedtuple("Download", ["url", "hashtype", "hashval"])
+def check_hash(src, fname):
+    hashval = checksum(src.hashtype, fname)
+    if src.hashval != hashval:
+        raise ValueError(
+            "Checksum mismatch in file '%s' %s != %s" % (fname, src.hashval, hashval)
+        )
+
+
+Download = collections.namedtuple("Download", ["url", "hashtype", "hashval", "dname"])
 
 urls = [
     Download(
-        url="http://nsis.sourceforge.net/mediawiki/images/8/8f/UAC.zip",
+        url="http://code.kliu.org/misc/elevate/elevate-1.3.0-redist.7z",
         hashtype="sha256",
-        hashval="20e3192af5598568887c16d88de59a52c2ce4a26e42c5fb8bee8105dcbbd1760",
+        hashval="b1b3f070353a0eadee2cea3a575049d10df9763ff24e39313da4cec9455382e1",
+        dname="elevate"
     ),
     Download(
-        url="http://nsis.sourceforge.net/mediawiki/images/a/a7/UnicodePathTest_1.0.zip",
+        url="http://nsis.sourceforge.net/mediawiki/images/7/79/UAC_v0.2.2d.zip",
         hashtype="sha256",
-        hashval="8e6d82dd2f6baf7256423d513f12ffd0906853c4d0cd14d41818038e05b33193",
+        hashval="9e64d93185e468fb873925db887f637778d926b864b5ff85600b7c9fce92660d",
+        dname="UAC",
     ),
     Download(
-        url="http://nsis.sourceforge.net/mediawiki/images/9/9d/Untgz.zip",
+        url="https://github.com/mingwandroid/nsis-untgz/archive/5c814c5f2c8a9a14e3a6ddd3e594fcc76db5b86a.zip",
         hashtype="sha256",
-        hashval="3c2a088b82b27b6183ea6479d61a6c0ecc54f52e484577b641ca21867bd81a4b",
+        hashval="ae68c41493abbb8800640acdf67a06c63bcceaaf21b539c50c348a20dc4b2803",
+        dname="untgz",
+    ),
+    Download(
+        url="https://github.com/mingwandroid/nsis-UnicodePathTest/archive/fa74caef553883f1820049d89e169aff57551796.zip",
+        hashtype="sha256",
+        hashval="1a4dc09f0fbb7d6be88835c50a7c95dbd37470c65e29cf676b14e3ad9c4d7494",
+        dname="UnicodePathTest",
     ),
 ]
 
 for each_url in urls:
     each_fname = download(each_url.url)
-    each_hashval = checksum(each_url.hashtype, each_fname)
-    if each_url.hashval != each_hashval:
-        raise ValueError(
-            "Checksum mismatch. %s != %s" % (each_url.hashval, each_hashval)
-        )
-    each_dname = unzip(each_fname)
+    check_hash(each_url, each_fname)
+    each_dname = unzip(each_fname, each_url.dname)
+
+# check if we are using the same files as in repo.continuum.io/pkgs/free/
+HashedFile = collections.namedtuple("File", ["fname", "hashtype", "hashval"])
+files = [
+    HashedFile(
+        fname=os.path.join("elevate", "bin.x86-32", "elevate.exe"),
+        hashtype="md5", hashval="7178d69ded53b7683dd52cd1ca0a20ff",
+    ),
+    HashedFile(
+        fname=os.path.join("UAC", "U", "UAC.dll"),
+        hashtype="md5", hashval="c71733d8ef33afcc99050ba2b0c56614",
+    ),
+    HashedFile(
+        fname=os.path.join("UnicodePathTest", "Plugin", "UnicodePathTest.dll"),
+        hashtype="md5", hashval="be71dfd1419eb91778cfde6bb8a44320",
+    ),
+    HashedFile(
+        fname=os.path.join("untgz", "Plugins", "x86-unicode", "untgz.dll"),
+        hashtype="md5", hashval="832c58ba1567ab9dec35e115f0b50e8f",
+    ),
+]
+
+for hashed_file in files:
+    check_hash(hashed_file, hashed_file.fname)
