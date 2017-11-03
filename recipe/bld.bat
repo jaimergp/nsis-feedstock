@@ -34,7 +34,7 @@ type "UnicodePathTest\Readme.txt"||exit 1
 
 echo(||exit 1
 echo(=== elevate.exe license information ===||exit 1
-echo(UKNOWN LICENSE||exit 1
+echo(UNKNOWN LICENSE||exit 1
 ) > "LICENSE.txt"||exit 1
 
 cd "%SRC_DIR%"
