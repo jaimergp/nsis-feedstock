@@ -2,6 +2,9 @@ set "PREFIX_NSIS=%PREFIX%\NSIS"
 robocopy . "%PREFIX_NSIS%" /S /XF bld.bat Docs Examples
 if errorlevel 1 exit 1
 
+copy nsis_activate.bat "%PREFIX%\etc\conda\activate.d\"
+if errorlevel 1 exit 1
+
 cd ..
 if errorlevel 1 exit 1
 
