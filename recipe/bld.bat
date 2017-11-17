@@ -2,8 +2,12 @@ set "PREFIX_NSIS=%PREFIX%\NSIS"
 robocopy . "%PREFIX_NSIS%" /S /XF bld.bat Docs Examples
 if errorlevel 1 exit 1
 
-copy nsis_activate.bat "%PREFIX%\etc\conda\activate.d\"
-if errorlevel 1 exit 1
+:: Copy the [de]activate scripts to %PREFIX%\etc\conda\[de]activate.d.
+:: This will allow them to be run on environment activation.
+FOR %%F IN (activate deactivate) DO (
+    IF NOT EXIST %PREFIX%\etc\conda\%%F.d MKDIR %PREFIX%\etc\conda\%%F.d||exit 1
+    COPY %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat||exit 1
+)
 
 cd ..
 if errorlevel 1 exit 1
