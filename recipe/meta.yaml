@@ -10,17 +10,23 @@ source:
   sha256: daa17556c8690a34fb13af25c87ced89c79a36a935bf6126253a9d9a5226367c
 
 build:
-  number: 0
-  skip: true  # [unix]
+  number: 1
+  skip: true  # [not (win and py27)]
+
+requirements:
+  build:
+    - python
+    - 7za
 
 about:
   home: http://sourceforge.net/projects/nsis
   summary: Nullsoft Scriptable Install System
-  license: CPL-1.0, zlib, bzip2
-  license_file: COPYING
+  license: CPL-1.0, zlib, bzip2, LGPL, BSD, UNKNOWN
+  license_file: LICENSE.txt
 
 extra:
   recipe-maintainers:
     - jakirkham
+    - mbargull
     - msarahan
     - patricksnape
