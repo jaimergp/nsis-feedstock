@@ -1,7 +1,6 @@
 set "PREFIX_NSIS=%PREFIX%\NSIS"
 robocopy . "%PREFIX_NSIS%" /V /S /XF bld.bat /XF Docs /XF Examples
-if %ERRORLEVEL% GEQ 8 exit 1
-if %ERRORLEVEL% LSS 8 exit 0
+if %ERRORLEVEL% 8 exit 1
 
 :: Copy the [de]activate scripts to %PREFIX%\etc\conda\[de]activate.d.
 :: This will allow them to be run on environment activation.
