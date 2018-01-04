@@ -3,7 +3,7 @@ About nsis
 
 Home: http://sourceforge.net/projects/nsis
 
-Package license: CPL-1.0, zlib, bzip2
+Package license: CPL-1.0, zlib, bzip2, LGPL, BSD, UNKNOWN
 
 Feedstock license: BSD 3-Clause
 
