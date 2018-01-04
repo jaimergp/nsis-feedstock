@@ -1,5 +1,5 @@
 set "PREFIX_NSIS=%PREFIX%\NSIS"
-robocopy . "%PREFIX_NSIS%" /V /S /XF bld.bat /XF Docs /XF Examples
+robocopy . "%PREFIX_NSIS%" /V /S /XF bld.bat /XD Docs Examples
 if errorlevel 8 exit 1
 
 :: Copy the [de]activate scripts to %PREFIX%\etc\conda\[de]activate.d.
