@@ -17,6 +17,8 @@ requirements:
   build:
     - python
     - 7za
+  host:
+  run:
 
 about:
   home: http://sourceforge.net/projects/nsis
