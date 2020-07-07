@@ -20,7 +20,7 @@ requirements:
 
 about:
   home: http://sourceforge.net/projects/nsis
-  summary: Nullsoft Scriptable Install System
+  summary: LicenseRef-Nullsoft-Scriptable-Install-System
   license: CPL-1.0, zlib, bzip2, LGPL, BSD, UNKNOWN
   license_file: LICENSE.txt
 
