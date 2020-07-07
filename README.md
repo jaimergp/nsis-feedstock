@@ -3,11 +3,11 @@ About nsis
 
 Home: http://sourceforge.net/projects/nsis
 
-Package license: CPL-1.0, zlib, bzip2, LGPL, BSD, UNKNOWN
+Package license: zlib-acknowledgement AND bzip2-1.0.6 AND CPL-1.0 AND LGPL-2.1-or-later
 
 Feedstock license: BSD-3-Clause
 
-Summary: LicenseRef-Nullsoft-Scriptable-Install-System
+Summary: Nullsoft Scriptable Install System
 
 
 
