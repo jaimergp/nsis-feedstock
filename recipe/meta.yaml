@@ -28,6 +28,7 @@ source:
 
 build:
   number: 0
+  skip: True   # [aarch64 and ppc64le]
 
 requirements:
   build:
