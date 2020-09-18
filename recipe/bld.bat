@@ -1,5 +1,6 @@
 set "PREFIX_NSIS=%PREFIX%\NSIS"
-robocopy . "%PREFIX_NSIS%" /V /S /XF bld.bat /XD Docs Examples
+cd binary
+robocopy . "%PREFIX_NSIS%" /V /S /XD Docs Examples
 if errorlevel 8 exit 1
 
 :: Copy the [de]activate scripts to %PREFIX%\etc\conda\[de]activate.d.
@@ -10,11 +11,7 @@ FOR %%F IN (activate deactivate) DO (
 )
 
 cd ..
-if errorlevel 1 exit 1
-
-%PYTHON% "%RECIPE_DIR%\get_plugins.py"
-if errorlevel 1 exit 1
-
+cd plugins
 copy "elevate\bin.x86-32\elevate.exe" "%PREFIX_NSIS%\Plugins\x86-unicode\"
 if errorlevel 1 exit 1
 copy "UAC\U\UAC.dll" "%PREFIX_NSIS%\Plugins\x86-unicode\"
@@ -25,7 +22,7 @@ copy "UnicodePathTest\Plugin\UnicodePathTest.dll" "%PREFIX_NSIS%\Plugins\x86-uni
 if errorlevel 1 exit 1
 
 (
-type "%SRC_DIR%\COPYING"||exit 1
+type "%SRC_DIR%\binary\COPYING"||exit 1
 
 echo(||exit 1
 echo(=== UAC plugin license information ===||exit 1
@@ -42,9 +39,6 @@ type "UnicodePathTest\Readme.txt"||exit 1
 echo(||exit 1
 echo(=== elevate.exe license information ===||exit 1
 echo(UNKNOWN LICENSE||exit 1
-) > "LICENSE.txt"||exit 1
-
-cd "%SRC_DIR%"
-if errorlevel 1 exit 1
+) > "%SRC_DIR%\LICENSE.txt"||exit 1
 
 exit 0
