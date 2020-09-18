@@ -35,7 +35,9 @@ requirements:
     - 7za    # [win]
     - p7zip  # [unix]
     - scons  # [unix]
+    - sed    # [unix]
   host:
+    - zlib   # [unix]
   run:
 
 test:

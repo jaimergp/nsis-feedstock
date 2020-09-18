@@ -35,7 +35,7 @@ popd
 
 cd src
 sed -i.bak "s/#ifndef NSIS_CONFIG_CONST_DATA_PATH/#if 1/g" Source/build.cpp
-scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no PREFIX=$PREFIX_NSIS install-compiler
+scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no PREFIX=$PREFIX_NSIS -Q PATH=$PATH install-compiler
 
 mkdir -p $PREFIX/bin
 ln -sf $PREFIX_NSIS/bin/makensis $PREFIX_NSIS/makensis.exe
