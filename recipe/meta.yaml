@@ -28,7 +28,7 @@ source:
 
 build:
   number: 0
-  skip: True   # [aarch64 and ppc64le]
+  skip: True   # [aarch64 or ppc64le or osx]
 
 requirements:
   build:
