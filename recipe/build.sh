@@ -6,8 +6,15 @@ rm -rf $PREFIX_NSIS/Docs
 rm -rf $PREFIX_NSIS/Examples
 popd
 
-ln -s $(which $CC) $BUILD_PREFIX/bin/gcc
-ln -s $(which $CXX) $BUILD_PREFIX/bin/g++
+rm -f $BUILD_PREFIX/bin/gcc
+echo '#!/bin/bash' > $BUILD_PREFIX/bin/gcc
+echo "exec $CC $CFLAGS $LDFLAGS"' "$@"' >> $BUILD_PREFIX/bin/gcc
+chmod +x $BUILD_PREFIX/bin/gcc
+
+rm -f $BUILD_PREFIX/bin/g++
+echo '#!/bin/bash' > $BUILD_PREFIX/bin/g++
+echo "exec $CXX $CXXFLAGS $LDFLAGS"' "$@"' >> $BUILD_PREFIX/bin/g++
+chmod +x $BUILD_PREFIX/bin/g++
 
 pushd plugins
 cp "UAC/U/UAC.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
