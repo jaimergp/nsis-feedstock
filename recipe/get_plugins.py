@@ -5,7 +5,6 @@ import os
 import subprocess
 import shutil
 import zipfile
-import sys
 
 try:
     from urllib.request import (
@@ -90,13 +89,13 @@ Download = collections.namedtuple("Download", ["url", "hashtype", "hashval", "dn
 
 urls = [
     Download(
-        url="https://code.kliu.org/misc/elevate/elevate-1.3.0-redist.7z",
+        url="http://code.kliu.org/misc/elevate/elevate-1.3.0-redist.7z",
         hashtype="sha256",
         hashval="b1b3f070353a0eadee2cea3a575049d10df9763ff24e39313da4cec9455382e1",
         dname="elevate"
     ),
     Download(
-        url="https://nsis.sourceforge.net/mediawiki/images/7/79/UAC_v0.2.2d.zip",
+        url="http://nsis.sourceforge.net/mediawiki/images/7/79/UAC_v0.2.2d.zip",
         hashtype="sha256",
         hashval="9e64d93185e468fb873925db887f637778d926b864b5ff85600b7c9fce92660d",
         dname="UAC",
@@ -115,14 +114,10 @@ urls = [
     ),
 ]
 
-
 for each_url in urls:
-    print("   - url: " + each_url.url)
-    print("     sha256: " + each_url.hashval)
-    print("     folder: binary/" + each_url.dname)
-    #each_fname = download(each_url.url)
-    #check_hash(each_url, each_fname)
-    #each_dname = unzip(each_fname, each_url.dname)
+    each_fname = download(each_url.url)
+    check_hash(each_url, each_fname)
+    each_dname = unzip(each_fname, each_url.dname)
 
 # check if we are using the same files as in repo.continuum.io/pkgs/free/
 HashedFile = collections.namedtuple("File", ["fname", "hashtype", "hashval"])
