@@ -6,16 +6,6 @@ rm -rf $PREFIX_NSIS/Docs
 rm -rf $PREFIX_NSIS/Examples
 popd
 
-rm -f $BUILD_PREFIX/bin/gcc
-echo '#!/bin/bash' > $BUILD_PREFIX/bin/gcc
-echo "exec $CC $CFLAGS $LDFLAGS"' "$@"' >> $BUILD_PREFIX/bin/gcc
-chmod +x $BUILD_PREFIX/bin/gcc
-
-rm -f $BUILD_PREFIX/bin/g++
-echo '#!/bin/bash' > $BUILD_PREFIX/bin/g++
-echo "exec $CXX $CXXFLAGS $LDFLAGS"' "$@"' >> $BUILD_PREFIX/bin/g++
-chmod +x $BUILD_PREFIX/bin/g++
-
 pushd plugins
 cp "UAC/U/UAC.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
 cp "untgz/Plugins/x86-unicode/untgz.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
@@ -24,7 +14,11 @@ popd
 
 cd src
 sed -i.bak "s/#ifndef NSIS_CONFIG_CONST_DATA_PATH/#if 1/g" Source/build.cpp
-scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no PREFIX=$PREFIX_NSIS -Q PATH=$PATH install-compiler
+scons \
+  CC="${CC}" CXX="${CXX}" APPEND_CCFLAGS="${CXXFLAGS}" APPEND_LINKFLAGS="${LDFLAGS}" \
+  SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all \
+  NSIS_CONFIG_CONST_DATA=no PREFIX=$PREFIX_NSIS \
+  -Q PATH=$PATH install-compiler
 
 mkdir -p $PREFIX/bin
 ln -sf $PREFIX_NSIS/bin/makensis $PREFIX_NSIS/makensis.exe
@@ -35,4 +29,3 @@ pushd $PREFIX_NSIS
   cd share
   ln -sf $PREFIX_NSIS nsis
 popd
-
