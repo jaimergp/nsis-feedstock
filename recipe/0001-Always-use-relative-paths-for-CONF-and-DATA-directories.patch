@@ -4,20 +4,20 @@
 
  # add prefixes defines
  if 'NSIS_CONFIG_CONST_DATA_PATH' in defenv['NSIS_CPPDEFINES']:
-+       # We do use NSIS_CONFIG_CONST_DATA_PATH, but we don't use the path defines below.
-+       # Those paths would get included as wchar_t* in the binaries.
-+       # Conda currently only supports char* replacements.
-+       # If we leave them out, we also avoid binary prefix replacement overall.
-+       pass
--       defenv.Append(NSIS_CPPDEFINES = [('PREFIX_CONF', '"%s"' % defenv.subst('$PREFIX_CONF'))])
--       defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DATA', '"%s"' % defenv.subst('$PREFIX_DATA'))])
--       defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DOC', '"%s"' % defenv.subst('$PREFIX_DOC'))])
-+#      defenv.Append(NSIS_CPPDEFINES = [('PREFIX_CONF', '"%s"' % defenv.subst('$PREFIX_CONF'))])
-+#      defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DATA', '"%s"' % defenv.subst('$PREFIX_DATA'))])
-+#      defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DOC', '"%s"' % defenv.subst('$PREFIX_DOC'))])
++	# We do use NSIS_CONFIG_CONST_DATA_PATH, but we don't use the path defines below.
++	# Those paths would get included as wchar_t* in the binaries.
++	# Conda currently only supports char* replacements.
++	# If we leave them out, we also avoid binary prefix replacement overall.
++	pass
+-	defenv.Append(NSIS_CPPDEFINES = [('PREFIX_CONF', '"%s"' % defenv.subst('$PREFIX_CONF'))])
+-	defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DATA', '"%s"' % defenv.subst('$PREFIX_DATA'))])
+-	defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DOC', '"%s"' % defenv.subst('$PREFIX_DOC'))])
++#	defenv.Append(NSIS_CPPDEFINES = [('PREFIX_CONF', '"%s"' % defenv.subst('$PREFIX_CONF'))])
++#	defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DATA', '"%s"' % defenv.subst('$PREFIX_DATA'))])
++#	defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DOC', '"%s"' % defenv.subst('$PREFIX_DOC'))])
  
  if defenv.get('SOURCE_DATE_EPOCH','') is not '':
-        defenv['ENV']['SOURCE_DATE_EPOCH'] = defenv['SOURCE_DATE_EPOCH'] = int(defenv['SOURCE_DATE_EPOCH'], 0) # Normalize and apply to ENV for child processes
+ 	defenv['ENV']['SOURCE_DATE_EPOCH'] = defenv['SOURCE_DATE_EPOCH'] = int(defenv['SOURCE_DATE_EPOCH'], 0) # Normalize and apply to ENV for child processes
 --- Source/makenssi.cpp
 +++ Source/makenssi.cpp
 @@ -573,11 +573,7 @@
