@@ -13,11 +13,10 @@ cp "UnicodePathTest/Plugin/UnicodePathTest.dll" "$PREFIX_NSIS/Plugins/x86-unicod
 popd
 
 cd src
-sed -i.bak "s/#ifndef NSIS_CONFIG_CONST_DATA_PATH/#if 1/g" Source/build.cpp
 scons \
   CC="${CC}" CXX="${CXX}" APPEND_CCFLAGS="${CXXFLAGS}" APPEND_LINKFLAGS="${LDFLAGS}" \
   SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all \
-  NSIS_CONFIG_CONST_DATA=no PREFIX=$PREFIX_NSIS \
+  NSIS_CONFIG_CONST_DATA_PATH=yes PREFIX=$PREFIX_NSIS \
   -Q PATH=$PATH install-compiler
 
 mkdir -p $PREFIX/bin

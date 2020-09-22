@@ -1,0 +1,48 @@
+--- SConstruct
++++ SConstruct
+@@ -209,9 +209,14 @@
+
+ # add prefixes defines
+ if 'NSIS_CONFIG_CONST_DATA_PATH' in defenv['NSIS_CPPDEFINES']:
++       # We do use NSIS_CONFIG_CONST_DATA_PATH, but we don't use the path defines below.
++       # Those paths would get included as wchar_t* in the binaries.
++       # Conda currently only supports char* replacements.
++       # If we leave them out, we also avoid binary prefix replacement overall.
++       pass
+-       defenv.Append(NSIS_CPPDEFINES = [('PREFIX_CONF', '"%s"' % defenv.subst('$PREFIX_CONF'))])
+-       defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DATA', '"%s"' % defenv.subst('$PREFIX_DATA'))])
+-       defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DOC', '"%s"' % defenv.subst('$PREFIX_DOC'))])
++#      defenv.Append(NSIS_CPPDEFINES = [('PREFIX_CONF', '"%s"' % defenv.subst('$PREFIX_CONF'))])
++#      defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DATA', '"%s"' % defenv.subst('$PREFIX_DATA'))])
++#      defenv.Append(NSIS_CPPDEFINES = [('PREFIX_DOC', '"%s"' % defenv.subst('$PREFIX_DOC'))])
+ 
+ if defenv.get('SOURCE_DATE_EPOCH','') is not '':
+        defenv['ENV']['SOURCE_DATE_EPOCH'] = defenv['SOURCE_DATE_EPOCH'] = int(defenv['SOURCE_DATE_EPOCH'], 0) # Normalize and apply to ENV for child processes
+--- Source/makenssi.cpp
++++ Source/makenssi.cpp
+@@ -573,11 +573,7 @@
+         tstring main_conf;
+         TCHAR* env_var = _tgetenv(_T("NSISCONFDIR"));
+         if (env_var == NULL)
+-#ifndef NSIS_CONFIG_CONST_DATA_PATH
+           main_conf = get_dir_name(get_executable_dir(argv[0]));
+-#else
+-          main_conf = _T(PREFIX_CONF);
+-#endif
+         else
+           main_conf = env_var;
+         main_conf += PLATFORM_PATH_SEPARATOR_STR;
+--- Source/build.cpp
++++ Source/build.cpp
+@@ -395,11 +395,7 @@
+   const TCHAR *dir = _tgetenv(_T("NSISDIR"));
+   if (dir) nsis_dir = dir;
+   else {
+-#ifndef NSIS_CONFIG_CONST_DATA_PATH
+     nsis_dir = get_dir_name(get_executable_dir(makensis_path));
+-#else
+-    nsis_dir = _T(PREFIX_DATA);
+-#endif
+   }
+   definedlist.add(_T("NSISDIR"), nsis_dir.c_str());
+ 
