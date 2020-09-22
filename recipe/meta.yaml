@@ -50,7 +50,12 @@ about:
   home: http://sourceforge.net/projects/nsis
   summary: Nullsoft Scriptable Install System
   license: zlib-acknowledgement AND bzip2-1.0.6 AND CPL-1.0 AND LGPL-2.1-or-later
-  license_file: LICENSE.txt
+  license_file:
+    - binary/COPYING
+    - plugins/UAC/License.txt
+    - plugins/untgz/LICENSE.TXT
+    - plugins/UnicodePathTest/Readme.txt
+    # plugins/elevate has unknown license
 
 extra:
   recipe-maintainers:

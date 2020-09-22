@@ -20,24 +20,6 @@ pushd plugins
 cp "UAC/U/UAC.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
 cp "untgz/Plugins/x86-unicode/untgz.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
 cp "UnicodePathTest/Plugin/UnicodePathTest.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
-
-(
-cat "$SRC_DIR/binary/COPYING" || exit 1
-
-echo ""
-echo "=== UAC plugin license information ==="
-cat "UAC/License.txt" || exit 1
-
-echo ""
-echo "=== untgz plugin license information ==="
-cat "untgz/LICENSE.TXT" || exit 1
-
-echo ""
-echo "=== UnicodePathTest plugin license information ==="
-cat "UnicodePathTest/Readme.txt" ||exit 1
-
-) > "$SRC_DIR/LICENSE.txt" || exit 1
-
 popd
 
 cd src
