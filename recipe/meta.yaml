@@ -33,8 +33,6 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}  # [unix]
-    - 7za    # [win]
-    - p7zip  # [unix]
     - scons  # [unix]
     - sed    # [unix]
   host:
