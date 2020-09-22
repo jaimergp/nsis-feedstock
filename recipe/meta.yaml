@@ -1,30 +1,60 @@
-{% set version = "3.01" %}
+{% set version = "3.06.1" %}
 
 package:
   name: nsis
   version: {{ version }}
 
 source:
-  fn: nsis-{{ version }}.zip
-  url: http://sourceforge.net/projects/nsis/files/NSIS%20{{ version.split(".")[0] }}/{{ version }}/nsis-{{ version }}.zip
-  sha256: daa17556c8690a34fb13af25c87ced89c79a36a935bf6126253a9d9a5226367c
+  - url: http://sourceforge.net/projects/nsis/files/NSIS%20{{ version.split(".")[0] }}/{{ version }}/nsis-{{ version }}.zip
+    sha256: d463ad11aa191ab5ae64edb3a439a4a4a7a3e277fcb138254317254f7111fba7
+    folder: binary
+
+  - url: http://sourceforge.net/projects/nsis/files/NSIS%20{{ version.split(".")[0] }}/{{ version }}/nsis-{{ version }}-src.tar.bz2  # [unix]
+    sha256: 9b5d68bf1874a7b393432410c7e8c376f174d2602179883845d2508152153ff0  # [unix]
+    folder: src   # [unix]
+    patches:  # [unix]
+      - 0001-Always-use-relative-paths-for-CONF-and-DATA-directories.patch  # [unix]
+
+  - url: https://code.kliu.org/misc/elevate/elevate-1.3.0-redist.7z
+    sha256: b1b3f070353a0eadee2cea3a575049d10df9763ff24e39313da4cec9455382e1
+    folder: plugins/elevate
+  - url: http://nsis.sourceforge.net/mediawiki/images/7/79/UAC_v0.2.2d.zip
+    sha256: 9e64d93185e468fb873925db887f637778d926b864b5ff85600b7c9fce92660d
+    folder: plugins/UAC
+  - url: https://github.com/mingwandroid/nsis-untgz/archive/5c814c5f2c8a9a14e3a6ddd3e594fcc76db5b86a.zip
+    sha256: ae68c41493abbb8800640acdf67a06c63bcceaaf21b539c50c348a20dc4b2803
+    folder: plugins/untgz
+  - url: https://github.com/mingwandroid/nsis-UnicodePathTest/archive/fa74caef553883f1820049d89e169aff57551796.zip
+    sha256: 1a4dc09f0fbb7d6be88835c50a7c95dbd37470c65e29cf676b14e3ad9c4d7494
+    folder: plugins/UnicodePathTest
 
 build:
-  number: 1003
-  skip: true  # [not win]
+  number: 0
+  skip: True   # [aarch64 or ppc64le or osx]
 
 requirements:
   build:
-    - python
-    - 7za
+    - {{ compiler('cxx') }}  # [unix]
+    - scons  # [unix]
   host:
+    - zlib   # [unix]
   run:
+
+test:
+  commands:
+    - makensis /VERSION  # [win]
+    - makensis -VERSION  # [unix]
 
 about:
   home: http://sourceforge.net/projects/nsis
   summary: Nullsoft Scriptable Install System
   license: zlib-acknowledgement AND bzip2-1.0.6 AND CPL-1.0 AND LGPL-2.1-or-later
-  license_file: LICENSE.txt
+  license_file:
+    - binary/COPYING
+    - plugins/UAC/License.txt
+    - plugins/untgz/LICENSE.TXT
+    - plugins/UnicodePathTest/Readme.txt
+    # plugins/elevate has unknown license
 
 extra:
   recipe-maintainers:
