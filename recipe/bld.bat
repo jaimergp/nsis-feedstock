@@ -14,11 +14,15 @@ cd ..
 cd plugins
 copy "elevate\bin.x86-32\elevate.exe" "%PREFIX_NSIS%\Plugins\x86-unicode\"
 if errorlevel 1 exit 1
-copy "UAC\U\UAC.dll" "%PREFIX_NSIS%\Plugins\x86-unicode\"
+copy "BgWorker\BgWorker.dll" "%PREFIX_NSIS%\Plugins\x86-unicode\"
+if errorlevel 1 exit 1
+copy "UAC\Plugins\x86-unicode\UAC.dll" "%PREFIX_NSIS%\Plugins\x86-unicode\"
 if errorlevel 1 exit 1
 copy "untgz\Plugins\x86-unicode\untgz.dll" "%PREFIX_NSIS%\Plugins\x86-unicode\"
 if errorlevel 1 exit 1
 copy "UnicodePathTest\Plugin\UnicodePathTest.dll" "%PREFIX_NSIS%\Plugins\x86-unicode\"
+if errorlevel 1 exit 1
+copy "access-control\Plugins\i386-unicode\AccessControl.dll" "%PREFIX_NSIS%\Plugins\x86-unicode\"
 if errorlevel 1 exit 1
 
 exit 0
