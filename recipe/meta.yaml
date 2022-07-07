@@ -50,6 +50,7 @@ requirements:
 test:
   commands:
     - makensis /VERSION          # [win]
+    # echo needed to make the output of the command visible in the CI logs :shrug:
     - makensis -VERSION && echo  # [unix]
 
 about:
