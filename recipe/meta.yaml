@@ -49,8 +49,8 @@ requirements:
 
 test:
   commands:
-    - makensis /VERSION  # [win]
-    - makensis -VERSION  # [unix]
+    - makensis /VERSION          # [win]
+    - makensis -VERSION && echo  # [unix]
 
 about:
   home: http://sourceforge.net/projects/nsis
