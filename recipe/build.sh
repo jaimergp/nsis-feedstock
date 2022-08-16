@@ -12,12 +12,18 @@ cp "untgz/Plugins/x86-unicode/untgz.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
 cp "UnicodePathTest/Plugin/UnicodePathTest.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
 popd
 
+scons_options="CC=\"${CC}\" CXX=\"${CXX}\" APPEND_CCFLAGS=\"${CXXFLAGS}\" APPEND_LINKFLAGS=\"${LDFLAGS}\""
+scons_options+=" SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all"
+scons_options+=" NSIS_CONFIG_CONST_DATA_PATH=yes PREFIX=\"$PREFIX_NSIS\""
+scons_options+=" -Q PATH=\"$PATH\""
+scons_targets="install-compiler"
+if [[ $nsis_variant == "log_enabled" ]]; then
+  scons_options+=" NSIS_CONFIG_LOG=yes"
+  scons_targets+=" install-stubs"
+fi
+
 cd src
-scons \
-  CC="${CC}" CXX="${CXX}" APPEND_CCFLAGS="${CXXFLAGS}" APPEND_LINKFLAGS="${LDFLAGS}" \
-  SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all \
-  NSIS_CONFIG_CONST_DATA_PATH=yes PREFIX=$PREFIX_NSIS \
-  -Q PATH=$PATH install-compiler
+scons $scons_options $scons_targets
 
 mkdir -p $PREFIX/bin
 ln -sf $PREFIX_NSIS/bin/makensis $PREFIX_NSIS/makensis.exe
