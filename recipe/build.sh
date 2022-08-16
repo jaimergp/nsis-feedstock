@@ -32,7 +32,7 @@ ln -sf "$PREFIX_NSIS/bin/makensis" "$PREFIX_NSIS/makensis.exe"
 ln -sf "$PREFIX_NSIS/bin/makensis" "$PREFIX/bin/makensis"
 
 pushd "$PREFIX_NSIS"
-  mkdir share
+  mkdir -p share
   cd share
   ln -sf "$PREFIX_NSIS" nsis
 popd
