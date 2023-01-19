@@ -30,28 +30,28 @@ Current build status
               <td>linux_64_nsis_variantlog_enabled</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=696&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nsis-feedstock?branchName=main&jobName=linux&configuration=linux_64_nsis_variantlog_enabled" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nsis-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_nsis_variantlog_enabled" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_64_nsis_variantstandard</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=696&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nsis-feedstock?branchName=main&jobName=linux&configuration=linux_64_nsis_variantstandard" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nsis-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_nsis_variantstandard" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_64_nsis_variantlog_enabled</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=696&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nsis-feedstock?branchName=main&jobName=win&configuration=win_64_nsis_variantlog_enabled" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nsis-feedstock?branchName=main&jobName=win&configuration=win%20win_64_nsis_variantlog_enabled" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_64_nsis_variantstandard</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=696&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nsis-feedstock?branchName=main&jobName=win&configuration=win_64_nsis_variantstandard" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nsis-feedstock?branchName=main&jobName=win&configuration=win%20win_64_nsis_variantstandard" alt="variant">
                 </a>
               </td>
             </tr>
