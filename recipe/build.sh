@@ -7,9 +7,11 @@ rm -rf "$PREFIX_NSIS/Examples"
 popd
 
 pushd plugins
-cp "UAC/U/UAC.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
+cp "UAC/Plugins/x86-unicode/UAC.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
+cp "BgWorker/BgWorker.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
 cp "untgz/Plugins/x86-unicode/untgz.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
 cp "UnicodePathTest/Plugin/UnicodePathTest.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
+cp "access-control/Plugins/i386-unicode/AccessControl.dll" "$PREFIX_NSIS/Plugins/x86-unicode/"
 popd
 
 extra_scons_options=""
@@ -21,6 +23,7 @@ fi
 
 cd src
 scons \
+  VERSION="${PKG_VERSION}" \
   CC="${CC}" CXX="${CXX}" APPEND_CCFLAGS="${CXXFLAGS}" APPEND_LINKFLAGS="${LDFLAGS}" \
   SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all \
   NSIS_CONFIG_CONST_DATA_PATH=yes PREFIX="$PREFIX_NSIS" \
