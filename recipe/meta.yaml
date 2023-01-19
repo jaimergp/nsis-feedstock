@@ -10,7 +10,7 @@ source:
     folder: binary
 
   - url: http://sourceforge.net/projects/nsis/files/NSIS%20{{ version.split(".")[0] }}/{{ version }}/nsis-{{ version }}-log.zip  # [win and nsis_variant == 'log_enabled']
-    sha256: cb792e8c39dfc7521e083a54187594ee85f7d94df06569fe7b79da05a523eeb2  # [win and nsis_variant == 'log_enabled']
+    sha1: 4fcb221a4dc4719580f201f6399b2035073aeaaa  # [win and nsis_variant == 'log_enabled']
     folder: binary_with_logging  # [win and nsis_variant == 'log_enabled']
 
   - url: http://sourceforge.net/projects/nsis/files/NSIS%20{{ version.split(".")[0] }}/{{ version }}/nsis-{{ version }}-src.tar.bz2  # [unix]
