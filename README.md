@@ -1,11 +1,11 @@
-About nsis
-==========
+About nsis-feedstock
+====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nsis-feedstock/blob/main/LICENSE.txt)
 
 Home: http://sourceforge.net/projects/nsis
 
 Package license: zlib-acknowledgement AND bzip2-1.0.6 AND CPL-1.0 AND LGPL-2.1-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nsis-feedstock/blob/main/LICENSE.txt)
 
 Summary: Nullsoft Scriptable Install System
 
