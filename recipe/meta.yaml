@@ -28,10 +28,10 @@ source:
   - url: https://github.com/conda/nsis-mirror/releases/download/v308/UAC-0.2.4c-20150526.zip
     sha256: 20e3192af5598568887c16d88de59a52c2ce4a26e42c5fb8bee8105dcbbd1760
     folder: plugins/UAC
-  - url: https://github.com/mingwandroid/nsis-untgz/archive/5c814c5f2c8a9a14e3a6ddd3e594fcc76db5b86a.zip
+  - url: https://github.com/conda/nsis-mirror/releases/download/v308/nsis-untgz-5c814c5f2c8a9a14e3a6ddd3e594fcc76db5b86a.zip
     sha256: ae68c41493abbb8800640acdf67a06c63bcceaaf21b539c50c348a20dc4b2803
     folder: plugins/untgz
-  - url: https://github.com/mingwandroid/nsis-UnicodePathTest/archive/fa74caef553883f1820049d89e169aff57551796.zip
+  - url: https://github.com/conda/nsis-mirror/releases/download/v308/nsis-UnicodePathTest-fa74caef553883f1820049d89e169aff57551796.zip
     sha256: 1a4dc09f0fbb7d6be88835c50a7c95dbd37470c65e29cf676b14e3ad9c4d7494
     folder: plugins/UnicodePathTest
   - url: https://github.com/conda/nsis-mirror/releases/download/v308/AccessControl-1.0.8.3-20210224.zip
