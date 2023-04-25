@@ -19,29 +19,27 @@ source:
     patches:  # [unix]
       - 0001-Always-use-relative-paths-for-CONF-and-DATA-directories.patch  # [unix]
   # Plugins
-  - url: https://nsis.sourceforge.io/mediawiki/images/6/62/BgWorker.zip
+  - url: https://github.com/conda/nsis-mirror/releases/download/v308/BgWorker-20091001.zip
     sha256: be8c5264c796309c465d017b12e12aee62d3c8c20966bbbecb96fb8fabb023ce
     folder: plugins/BgWorker
-  - url: https://code.kliu.org/misc/elevate/elevate-1.3.0-redist.7z
+  - url: https://github.com/conda/nsis-mirror/releases/download/v308/elevate-1.3.0-redist.7z
     sha256: b1b3f070353a0eadee2cea3a575049d10df9763ff24e39313da4cec9455382e1
     folder: plugins/elevate
-  - url: https://nsis.sourceforge.io/mediawiki/images/8/8f/UAC.zip
+  - url: https://github.com/conda/nsis-mirror/releases/download/v308/UAC-0.2.4c-20150526.zip
     sha256: 20e3192af5598568887c16d88de59a52c2ce4a26e42c5fb8bee8105dcbbd1760
     folder: plugins/UAC
-  - url: https://github.com/mingwandroid/nsis-untgz/archive/5c814c5f2c8a9a14e3a6ddd3e594fcc76db5b86a.zip
+  - url: https://github.com/conda/nsis-mirror/releases/download/v308/nsis-untgz-5c814c5f2c8a9a14e3a6ddd3e594fcc76db5b86a.zip
     sha256: ae68c41493abbb8800640acdf67a06c63bcceaaf21b539c50c348a20dc4b2803
     folder: plugins/untgz
-  - url: https://github.com/mingwandroid/nsis-UnicodePathTest/archive/fa74caef553883f1820049d89e169aff57551796.zip
+  - url: https://github.com/conda/nsis-mirror/releases/download/v308/nsis-UnicodePathTest-fa74caef553883f1820049d89e169aff57551796.zip
     sha256: 1a4dc09f0fbb7d6be88835c50a7c95dbd37470c65e29cf676b14e3ad9c4d7494
     folder: plugins/UnicodePathTest
-  # AccessControl does not provide historical versions as far as I can tell..
-  # this is for version v1.0.8.3 - 24th February 2021
-  - url: https://nsis.sourceforge.io/mediawiki/images/4/4a/AccessControl.zip
+  - url: https://github.com/conda/nsis-mirror/releases/download/v308/AccessControl-1.0.8.3-20210224.zip
     sha256: 9aa60f9c5c023fda2808af216514d8913d2673bc522d944ee771da032a1bdc10
     folder: plugins/access-control
 
 build:
-  number: 1
+  number: 2
   skip: True   # [aarch64 or ppc64le or osx]
   string: h{{ PKG_HASH }}_log_{{ PKG_BUILDNUM }}  # [nsis_variant == 'log_enabled']
   track_features:
