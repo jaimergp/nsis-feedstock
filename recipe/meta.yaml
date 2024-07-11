@@ -48,6 +48,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}  # [unix]
+    - {{ stdlib('c') }}  # [unix]
     - scons  # [unix]
   host:
     - zlib   # [unix]
